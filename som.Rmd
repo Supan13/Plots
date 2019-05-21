@@ -1,0 +1,27 @@
+---
+title: "SOM"
+fig_width: 10
+output:
+  pdf_document: default
+  html_document: default
+fig_height: 10
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+file_lattice <- read.csv("he_med_lattice_input_final.csv")
+
+library(lattice)
+bwplot(file_lattice$Exp ~ file_lattice$Group | file_lattice$SOM_re ,layout=c(6,4),
+       auto.key=F, horiz=F,,par.settings=simpleTheme(cex=0.1,font=1,pch="10",col=c("Black","blue","RED")), ylab="Exp Value",xlab="A vs B")
+```
+
+```{r}
+file_lattice1 <- read.csv("he_yoga_lattice_input_final.csv")
+bwplot(file_lattice1$Exp ~ file_lattice1$Group | file_lattice1$SOM_re ,layout=c(6,4),
+       auto.key=F, horiz=F,,par.settings=simpleTheme(cex=0.1,font=1,pch="10",col=c("Black","blue","RED")), ylab="Exp Value",xlab="A vs B")
+
+```
