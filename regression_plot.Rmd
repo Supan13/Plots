@@ -1,0 +1,28 @@
+---
+title: "regression_plot"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(ggpmisc)
+master <- read.csv("v2_v1_pss10_ssGSEA.csv",row.names=1)
+
+genes <- as.vector(unlist(colnames(master)))
+
+formula <- y ~x
+
+for(i in genes){
+  print(ggplot(master, aes_string(x= "PSS10", y=i, color = "Group")) +geom_point(alpha = 1) +
+  geom_smooth(method = "lm", formula = formula, se = F)+ xlab("PSS10")+
+  stat_fit_glance(method = 'lm',method.args = list(formula = formula),geom = 'text',
+  aes(label = paste("P-value = ", signif(..p.value.., digits = 4), sep = "")),
+  label.x.npc = 'right', label.y.npc = 0.35, size = 6))
+  
+}
+```
+
