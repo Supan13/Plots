@@ -1,0 +1,23 @@
+---
+title: "upset_plot"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+__Instead of venn diagram do upset plot for more than 6-way comparison__
+      
+```{r}
+library(UpSetR)
+
+upset_file <- read.csv("upset_input.csv",row.names = 1)
+
+upset(upset_file,sets = c("Epigenetics", "RS1","RS2","RS3","RS4","RS5"),
+      keep.order = TRUE, sets.bar.color=c("purple","green","red","pink","orange","black"),
+      matrix.color="black",main.bar.color="blue")
+```
+
+
+
