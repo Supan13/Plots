@@ -1,0 +1,49 @@
+---
+title: "plots"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+
+file <- read.csv("biocarta_inflamm_pathway_summary2.csv",header=TRUE)
+file$Group <- as.factor(file$Group)
+
+pd <- position_dodge(0.5) 
+ggplot(file, aes(x=Timeline, y=Value,color=Group,shape=Group,group=Group)) + 
+     geom_errorbar(aes(ymin=Value-ci, ymax=Value+ci), width=.1, position=pd,color="black") +
+     scale_shape_manual(values=c(1, 19, 15,3))+
+     scale_color_manual(values=c('black','blue','orange','green'))+
+     geom_point(position=pd,size=4)+
+     geom_line(aes(linetype=Group),position=pd) +
+     theme(legend.position="bottom",legend.text = element_text(colour="black", size=12, 
+                                                            face="bold")) +
+     theme(legend.position="bottom",legend.title = element_text(colour="black", size=12, 
+                                                             face="bold"))+
+     labs(x="",y="Mean +- 95% CI")
+```
+
+
+```{r}
+file <- read.csv("hallmark_oxid_phospho_summary2.csv",header=TRUE)
+file$Group <- as.factor(file$Group)
+
+pd <- position_dodge(0.5) 
+ggplot(file, aes(x=Timeline, y=Value,color=Group,shape=Group,group=Group)) + 
+     geom_errorbar(aes(ymin=Value-ci, ymax=Value+ci), width=.1, position=pd,color="black") +
+     scale_shape_manual(values=c(1, 19, 15,3))+
+     scale_color_manual(values=c('black','blue','orange','green'))+
+     geom_point(position=pd,size=4)+
+     geom_line(aes(linetype=Group),position=pd) +
+     theme(legend.position="bottom",legend.text = element_text(colour="black", size=12, 
+                                                            face="bold")) +
+     theme(legend.position="bottom",legend.title = element_text(colour="black", size=12, 
+                                                             face="bold"))+
+     labs(x="",y="Mean +- 95% CI")
+```
+ 
+ 
